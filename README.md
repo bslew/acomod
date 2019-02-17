@@ -1,9 +1,20 @@
-# ACOustic RESonance package
+# ACOustic MODes Viewer
 
-This package provides a module and a viewer program to trace resonance frequencies of excited bodies.
+This program is a simple viewer of power spectral density of sound. 
+The package provides a module and a program to trace Fourier acoustic modes and resonance frequencies of excited bodies.
 
-For example, it can be used to measure length of an excited metal bar, or to help identify resonance frequencies
-and corresponding length scales of mechanical components (e.g. in a running car with depending on speed)
-or to test 1/f noise and microphonic effects in electrical devices the program runs on.
+## Use cases
+For example you can:
+* estimate length of an excited metal bar, guitar string, or 
+* measure frequency of flute tones, 
+* identify resonance frequencies and through provided sound wave propagation velocity the corresponding length scales of mechanical components that generate unwanted resonances (e.g. in a car as a function of speed)
+* test 1/f noise and microphonic effects in electrical devices the program runs on.
 
-[Github-flavored Markdown](https://guides.github.com/features/mastering-markdown/)
+
+## Installation
+`pip install --index-url=https://test-pypi.org/simple acomod`
+
+## Screenshots
+
+![Screenshot](screenshot.png)
+Format: ![Screenshot](https://github.com/bslew/acomod)

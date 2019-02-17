@@ -45,6 +45,7 @@ reqired_packages=[
     'numpy',
     'matplotlib',
     'sounddevice',
+    'soundfile',
     'scipy',
     ]
 
