@@ -11,10 +11,21 @@ For example you can:
 * test 1/f noise and microphonic effects in electrical devices the program runs on.
 
 
+## Features
+* Records sound from microphone or sound file (e.g. wav format)
+* Shows trace of maximal peaks 
+
+
+### Features that will be implemented 
+* Save recorded and processed data to files for further analysis (not implemented yet)
+* Save animations of PSD response for video files (not implemented yet)
+
 ## Installation
 `pip install --index-url=https://test-pypi.org/simple acomod`
 
 ## Screenshots
 
 ![Screenshot](screenshot.png)
-Format: ![Screenshot](https://github.com/bslew/acomod)
+
+## Authors
+Bartosz Lew (bartosz.lew@protonmail.com)
