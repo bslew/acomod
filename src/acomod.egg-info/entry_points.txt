@@ -1,3 +1,0 @@
-[gui_scripts]
-acoustic_mode_viewer = acomod.sonidist:main
-
