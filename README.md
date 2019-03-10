@@ -1,4 +1,4 @@
-# ACOustic MODes Viewer (v0.1.1 alpha)
+# Acoustic Modes Viewer (v0.1.1 alpha)
 
 This program is a simple viewer of power spectral density of sound. 
 The package provides a module and a program to trace Fourier acoustic modes and resonance frequencies of excited bodies.
