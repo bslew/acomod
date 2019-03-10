@@ -385,15 +385,13 @@ class MainWindow(QtWidgets.QMainWindow):
 
     @QtCore.pyqtSlot()
     def on_action_About_triggered(self):
-        QtWidgets.QMessageBox.about(self, "About",
-                                """Resonant Frequency Viewer
+        QtWidgets.QMessageBox.about(self, "About", "Resonant Frequency Viewer (v."+global_settings.PROGRAM_VERSION+")"+"""        
 
-This program calculates and visualizes spectrum of sound waves provided from microphone or from a sound file and
-to reveal acoustic modes of resonating or rotating objects and relation to their length (dimensions) or rotation frequency.
+This program calculates and visualizes spectrum of acoustic waves provided from a microphone or from a sound file. 
+It shows acoustic modes of resonating or rotating objects and relation to their length scales (dimensions) or rotation frequencies via provided speed of sound.
 
-For example, it can be used to measure length of an excited metal bar, or to help identify resonance frequencies
-and corresponding length scales of mechanical components (e.g. in a running car with depending on speed)
-or to test 1/f noise and microphonic effects in electrical devices the program runs on.
+For example, the program can be used to estimate length of an excited metal bar, and to identify resonance frequencies
+and the corresponding length scales of mechanical components (e.g. in a running car) or to test 1/f noise and microphonic effects in electrical devices the program runs on.
 
 Copyright (2019) Bartosz Lew (bartosz.lew@protonmail.com)
 
