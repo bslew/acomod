@@ -8,7 +8,7 @@ import os,sys
 from PyQt5 import QtCore
 PROGRAM_NAME="Acoustic Oscillations Viewer"
 COMPANY_NAME="Torun Centre for Astronomy"
-PROGRAM_VERSION='0.1.1 (alpha)'
+PROGRAM_VERSION='0.1.2 (alpha)'
 
 class mySettings(QtCore.QSettings):
     def __init__(self,parent=None):

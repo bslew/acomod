@@ -39,7 +39,7 @@ os.environ["CXX"] = "c++"
 #     )
 
 reqired_packages=[
-#    'pyqt5',
+    'PyQt5',
     'numpy',
     'matplotlib',
     'sounddevice',
@@ -48,7 +48,7 @@ reqired_packages=[
     ]
 
 setup(name='acomod',
-      version='0.1.1',
+      version='0.1.2',
       description='Acoustic Oscillations Viewer',
       long_description=read('README.md'),
       author='Bartosz Lew',

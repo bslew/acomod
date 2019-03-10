@@ -1,4 +1,4 @@
-# Acoustic Modes Viewer (v0.1.1 alpha)
+# Acoustic Modes Viewer (v0.1.2 alpha)
 
 This program is a simple viewer of power spectral density of sound. 
 The package provides a module and a program to trace Fourier acoustic modes and resonance frequencies of excited bodies.
@@ -20,7 +20,7 @@ The package provides a module and a program to trace Fourier acoustic modes and 
 * Save animations of PSD response for video files (not implemented yet)
 
 ## Installation
-`pip install --index-url=https://test-pypi.org/simple acomod`
+`pip install acomod`
 
 ## Screenshots
 
