@@ -1,12 +1,13 @@
 '''
 Created on Feb 10, 2019
 
-@author: blew
+@author: Bartosz Lew <bartosz.lew@protonmail.com>
 '''
 # import pkg_resources
 
 # import PyQt5.QtWidgets
-import sys
+import os,sys
+sys.path.append(os.sep.join(os.path.abspath(__file__).split(os.sep)[:-2]))  
 
 from PyQt5 import QtWidgets 
 # import MainWindow

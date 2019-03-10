@@ -45,13 +45,13 @@
          <item>
           <widget class="QDoubleSpinBox" name="doubleSpinBox_recordingLength">
            <property name="decimals">
-            <number>2</number>
+            <number>1</number>
            </property>
            <property name="minimum">
-            <double>0.010000000000000</double>
+            <double>0.100000000000000</double>
            </property>
            <property name="maximum">
-            <double>1000.000000000000000</double>
+            <double>10.000000000000000</double>
            </property>
            <property name="singleStep">
             <double>0.100000000000000</double>
@@ -144,7 +144,7 @@
    </widget>
    <widget class="QMenu" name="menuAbout">
     <property name="title">
-     <string>Hel&amp;p</string>
+     <string>He&amp;lp</string>
     </property>
     <addaction name="action_About"/>
    </widget>
@@ -316,7 +316,7 @@
      <normaloff>:/icons/icons/media-playback-start.svg</normaloff>:/icons/icons/media-playback-start.svg</iconset>
    </property>
    <property name="text">
-    <string>Play</string>
+    <string>&amp;Play</string>
    </property>
    <property name="shortcut">
     <string>Ctrl+P</string>
@@ -331,7 +331,7 @@
      <normaloff>:/icons/icons/document-save-as.png</normaloff>:/icons/icons/document-save-as.png</iconset>
    </property>
    <property name="text">
-    <string>Save Data As...</string>
+    <string>&amp;Save Data As...</string>
    </property>
    <property name="shortcut">
     <string>Ctrl+S</string>
@@ -339,7 +339,7 @@
   </action>
   <action name="actionFocus_on_plot">
    <property name="text">
-    <string>Focus on plot</string>
+    <string>&amp;Focus on plot</string>
    </property>
    <property name="shortcut">
     <string>Ctrl+G</string>
@@ -347,7 +347,7 @@
   </action>
   <action name="actionInspect_plot">
    <property name="text">
-    <string>Inspect plot</string>
+    <string>&amp;Inspect plot</string>
    </property>
   </action>
  </widget>

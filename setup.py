@@ -1,5 +1,3 @@
-#!/usr/bin/env python
-
 # from distutils.core import setup, Extension
 from setuptools import setup
 import os
@@ -41,7 +39,7 @@ os.environ["CXX"] = "c++"
 #     )
 
 reqired_packages=[
-    'PyQt5',
+#    'pyqt5',
     'numpy',
     'matplotlib',
     'sounddevice',
@@ -50,7 +48,7 @@ reqired_packages=[
     ]
 
 setup(name='acomod',
-      version='0.1',
+      version='0.1.1',
       description='Acoustic Oscillations Viewer',
       long_description=read('README.md'),
       author='Bartosz Lew',

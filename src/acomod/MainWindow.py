@@ -11,6 +11,7 @@ from PyQt5 import QtCore, QtGui,uic
 from PyQt5.QtCore import pyqtSignal,pyqtSlot, QSettings
 import os,sys
 import numpy as np
+import scipy.io.wavfile as wf
 
 from acomod import global_settings
 from acomod import resources
@@ -120,6 +121,13 @@ class MainWindow(QtWidgets.QMainWindow):
 #         self.show()
         
         
+        '''
+        
+        Internal data
+        
+        '''
+        self.recorded_data={'samples' : []}
+        
     '''
     
     
@@ -148,7 +156,7 @@ class MainWindow(QtWidgets.QMainWindow):
     def cleanUp(self):
         if self.ui.actionRecord.isChecked():
             print("Disconnecting thread")
-            self.dataTh.newSampleSignal.disconnect()
+            self.dataTh.newSamplePowerSignal.disconnect()
             msg="Waiting for data thread to finish...please wait"
             print(msg)
             self.show_statusBarMsg(msg=msg,timeout=0)
@@ -240,8 +248,11 @@ class MainWindow(QtWidgets.QMainWindow):
 # #                                                parent=self
 #                                                )
             self.dataTh=recordSignal.newSoundSample(recordingLength=self.ui.doubleSpinBox_recordingLength.value())
-            self.dataTh.newSampleSignal.connect(self.matplotlibWidget.mkplot)
+            self.dataTh.newSamplePowerSignal.connect(self.matplotlibWidget.mkplot)
+            self.dataTh.newSampleSignal.connect(self.on_new_sample_captured)
             self.dataTh.finished.connect(self.dataTh_finished)
+            self.recorded_data={'samples' : []}
+
             self.matplotlibWidget.clearData()
             print("Starting data thread")
             self.dataTh.start()
@@ -272,14 +283,15 @@ class MainWindow(QtWidgets.QMainWindow):
         self.ui.frame.setFocus()
 
         if isOn:
-            self.dataTh=recordSignal.newSoundSample(soundFile=self.soundFileName)
-            self.dataTh.newSampleSignal.connect(self.matplotlibWidget.mkplot)
+            self.dataTh=recordSignal.newSoundSample(soundFile=self.soundFileName,
+                                                    recordingLength=self.ui.doubleSpinBox_recordingLength.value())
+            self.dataTh.newSamplePowerSignal.connect(self.matplotlibWidget.mkplot)
             self.dataTh.finished.connect(self.dataTh_finished)
             self.matplotlibWidget.clearData()
             print("Starting data thread")
             self.dataTh.start()
             print("Thread started")
-            self.show_statusBarMsg("Playing "+self.soundFileName)
+            self.show_statusBarMsg("Playing "+self.soundFileName,0)
 #             x=np.arange(1000)
 #             y=np.sin(x)
 #             self.newSampleSignal.emit(list(x),list(y))
@@ -330,15 +342,25 @@ class MainWindow(QtWidgets.QMainWindow):
         prevFileName=mysettings.value("LastSavedFile",".",type=str)
         print('prevFileName: %s' % prevFileName)
 #         prevFileName=""
-        folderName = QtWidgets.QFileDialog.getExistingDirectory(self,"Select destination folder", prevFileName, options=options)
-        if folderName:
-            print(folderName)
-            mysettings.setValue("LastSavedFile",folderName)
-            self.soundFileName=folderName
-            self.show_statusBarMsg("Not implemented yet")
-#             self.show_statusBarMsg("Selected sound file: "+folderName)
-#             self.newSoundFileSelected.emit(folderName)
+#         saveFileName = QtWidgets.QFileDialog.getExistingDirectory(self,"Select destination folder", prevFileName, options=options)
+        saveFileName = QtWidgets.QFileDialog.getSaveFileName(self, "Save File",
+                           prevFileName,options=options);
+        if saveFileName[0]!='':
+            saveFileName=saveFileName[0]
+            print(saveFileName)
+            mysettings.setValue("LastSavedFile",saveFileName)
+            self.soundFileName=saveFileName
+#             self.show_statusBarMsg("Not implemented yet")
+#             self.show_statusBarMsg("Selected sound file: "+saveFileName)
+#             self.newSoundFileSelected.emit(saveFileName)
 #             self.ui.actionPlay.setEnabled(True)
+            allsamples=[]
+            for s in self.recorded_data['samples']:
+                allsamples+=s
+            print("All samples length {}".format(len(allsamples)))
+            allsamples=np.asanyarray(allsamples, dtype=float)
+            wf.write(saveFileName,int(mysettings.value('sampling',type=float)),allsamples)
+            self.show_statusBarMsg("Saving to file {}".format(saveFileName))
 
         
     @QtCore.pyqtSlot()
@@ -396,15 +418,28 @@ Copyright (2019) Bartosz Lew (bartosz.lew@protonmail.com)
     def on_actionPlotAverage_toggled(self,tf):
         settings=global_settings.mySettings(self)
         settings.setValue('PlotAverage',tf)
+        self.matplotlibWidget.mkplot()
 
     @QtCore.pyqtSlot(bool)
     def on_actionPlotMaximalValues_toggled(self,tf):
-        print(tf)
+#         print(tf)
         settings=global_settings.mySettings(self)
         settings.setValue('PlotMaximalValues',tf)
+        self.matplotlibWidget.mkplot()
 
     @QtCore.pyqtSlot(bool)
     def on_actionFocus_on_plot_triggered(self,tf):
         self.ui.frame.setFocus()
         self.show_statusBarMsg("Use arrow keys to select maximum",0)
 
+        
+    @QtCore.pyqtSlot(list,list)
+    def on_new_sample_captured(self,t,sig):
+#         self.recorded_data['sample']=np.vstack([np.array(t),np.array(sig)]).T
+        self.recorded_data['samples'].append(sig)
+
+        print("Captured new sound sample ({} samples, duration {} s".format(
+            len(t),t[-1]))
+        print(len(self.recorded_data['samples']))
+
+#     def write_to_file(self,):

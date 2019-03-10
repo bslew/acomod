@@ -78,7 +78,7 @@ class MatplotlibWidget(FigureCanvas):
         self.maxFn=None
         self.plotLabels=None
         self.dataCount=0
-        
+        self.selectedMaxima=None
 
     def find_maxima(self, fn,Npeaks):
         m,=argrelextrema(fn[:,1], np.greater,order=10)
@@ -124,8 +124,11 @@ class MatplotlibWidget(FigureCanvas):
 
 
     def selectMaxima(self,n):
-        self.selectedMaxima=self.sortedMaxima[:self.Npeaks]
-        
+        if n>0:
+            self.selectedMaxima=np.sort(self.sortedMaxima[:self.Npeaks],order='f')
+        else:
+            self.selectedMaxima=[]
+            
     def plotMaxima(self):
         plotLabels, =self.axes.plot(self.selectedMaxima['f'],self.selectedMaxima['P'],'ko')
         self.updatablePlotArtists.append(plotLabels)
@@ -165,17 +168,22 @@ class MatplotlibWidget(FigureCanvas):
         # find maxima
         # 
         self.Npeaks=self.settings.value("Npeaks",10,int)
-        maxx,maxy=self.find_maxima(self.maxFn,self.Npeaks)
+        if type(self.maxFn)!=type(None):
+            maxx,maxy=self.find_maxima(self.maxFn,self.Npeaks)
 
-        L=[ self.cs/x for x in maxx]
-#             t=self.axes.text(x,y,'{0:.1f} Hz\n{1:.3f} m'.format(x,l))
-        self.sortedMaxima=np.sort(np.array([(x,y,l) for x,y,l in zip(maxx,maxy,L)], dtype=[('f',float),('P',float),('L',float)]), 
-                             axis=0, order='P')[::-1]
-        self.selectMaxima(self.Npeaks)
-#         print(sortedMaxima)
-#         print(sortedMaxima['x'],sortedMaxima['y'])
-        print("Maxima frequencies and corresponding lengths, sorted according to decreasing spectral power [(Hz,m)]: {}".format(
-            self.selectedMaxima[['f','L']]))
+            L=[ self.cs/x for x in maxx]
+    #             t=self.axes.text(x,y,'{0:.1f} Hz\n{1:.3f} m'.format(x,l))
+            self.sortedMaxima=np.sort(np.array([(x,y,l) for x,y,l in zip(maxx,maxy,L)], dtype=[('f',float),('P',float),('L',float)]), 
+                                 axis=0, order='P')[::-1]
+            self.selectMaxima(self.Npeaks)
+    #         self.sortedMaxima=np.sort(self.sortedMaxima, order='f')
+    #         print(sortedMaxima)
+    #         print(sortedMaxima['x'],sortedMaxima['y'])
+        
+            if self.Npeaks>0:
+                print("Maxima frequencies and corresponding lengths, sorted according to decreasing spectral power [(Hz,m)]:")
+                print(self.selectedMaxima[['f','L','P']])
+
 
 
 
@@ -197,46 +205,50 @@ class MatplotlibWidget(FigureCanvas):
         #
         # plot
         #
-        bs=len(self.rawFn)//self.plotPointsCount
-#         x,y=self.binFn(np.array([x,y],dtype=float).T)
-        x,y=self.rawFn[::bs][:,0],self.rawFn[::bs][:,1]
-        rawFnPlot, =self.axes.plot(x,y,'k-')
-        self.updatablePlotArtists.append(rawFnPlot)
+        if type(self.maxFn)!=type(None):
+            self.plotPointsCount=self.settings.value("plotPointsCount",type=int)
+            bs=len(self.rawFn)//self.plotPointsCount
+    #         x,y=self.binFn(np.array([x,y],dtype=float).T)
+            x,y=self.rawFn[::bs][:,0],self.rawFn[::bs][:,1]
+            rawFnPlot, =self.axes.plot(x,y,'k-')
+            self.updatablePlotArtists.append(rawFnPlot)
+    
+            if self.settings.value("PlotAverage",type=bool):
+                x,y=self.avgFn[::bs][:,0],self.avgFn[::bs][:,1]
+    #             x,y=self.binFn(self.avgFn)
+                avgFnPlot, =self.axes.plot(x,y,'g-', zorder=10, lw=2)
+    #             avgFnPlot, =self.axes.plot(self.avgFn[:,0],self.avgFn[:,1],'g-', zorder=10, lw=2)
+                self.updatablePlotArtists.append(avgFnPlot)
+            if self.settings.value("PlotMaximalValues",type=bool):
+                x,y=self.maxFn[::bs][:,0],self.maxFn[::bs][:,1]
+    #             x,y=self.binFn(self.maxFn)
+                maxFnPlot, =self.axes.plot(x,y,'r-', zorder=20)
+    #             avgFnPlot, =self.axes.plot(self.maxFn[:,0],self.maxFn[:,1],'r-', zorder=20)
+                self.updatablePlotArtists.append(maxFnPlot)
+    
 
-        if self.settings.value("PlotAverage",type=bool):
-            x,y=self.avgFn[::bs][:,0],self.avgFn[::bs][:,1]
-#             x,y=self.binFn(self.avgFn)
-            avgFnPlot, =self.axes.plot(x,y,'g-', zorder=10, lw=2)
-#             avgFnPlot, =self.axes.plot(self.avgFn[:,0],self.avgFn[:,1],'g-', zorder=10, lw=2)
-            self.updatablePlotArtists.append(avgFnPlot)
-        if self.settings.value("PlotMaximalValues",type=bool):
-            x,y=self.maxFn[::bs][:,0],self.maxFn[::bs][:,1]
-#             x,y=self.binFn(self.maxFn)
-            maxFnPlot, =self.axes.plot(x,y,'r-', zorder=20)
-#             avgFnPlot, =self.axes.plot(self.maxFn[:,0],self.maxFn[:,1],'r-', zorder=20)
-            self.updatablePlotArtists.append(maxFnPlot)
 
 
-
-
-        #
-        # plot maxima
-        #
-        self.plotMaxima()
+            #
+            # plot maxima
+            #
+            if self.Npeaks>0:
+                self.plotMaxima()
 
         
-        #
-        # plot labels
-        #
-#         self.plot_labels(self.selectedMaxima['f'],self.selectedMaxima['P'])
-#         print(self.selectedMaxima['P'][self.currentMaximum])
-        if self.currentMaximum>=self.Npeaks:
-            self.currentMaximum=self.Npeaks-1
-        if len(self.selectedMaxima['f'])>self.currentMaximum:
-            self.plot_labels(self.selectedMaxima['f'][self.currentMaximum],self.selectedMaxima['P'][self.currentMaximum])
-
-        self.resetRanges()
-        self.draw()
+            #
+            # plot labels
+            #
+    #         self.plot_labels(self.selectedMaxima['f'],self.selectedMaxima['P'])
+    #         print(self.selectedMaxima['P'][self.currentMaximum])
+            if self.Npeaks>0:
+                if self.currentMaximum>=self.Npeaks:
+                    self.currentMaximum=self.Npeaks-1
+                if len(self.selectedMaxima['f'])>self.currentMaximum:
+                    self.plot_labels(self.selectedMaxima['f'][self.currentMaximum],self.selectedMaxima['P'][self.currentMaximum])
+    
+            self.resetRanges()
+            self.draw()
         
 #         sd.play(y, 11600)
 #         sd.default.samplerate = self.ui.doubleSpinBox_sampling.value()
