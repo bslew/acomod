@@ -27,18 +27,18 @@ The package provides a module and a program to trace Fourier acoustic modes and 
 ![Screenshot](screenshot.png)
 
 ## Troubleshooting
-##### 	**acoustic_mode_viewer givens core dump on start**<br>
-	<br>
-	When you pip3 install acomod in virtual environment or locally via --user option Qt platform plugin may fail to be properly initialized due to incorrect configuration of LD_LIBRARY_PATH environment variable (under linux) pointing location of Qt libraries installed most likely somewhere in the system directories. If version of those is not the one required by the PyQt5 the program will fail with<br>
+##### 	**acoustic_mode_viewer gives core dump on start**<br>
+When you pip3 install acomod in virtual environment or locally via --user option Qt platform plugin may fail to be properly initialized due to incorrect configuration of LD_LIBRARY_PATH environment variable (under Linux) and pointing locations of Qt libraries installed most likely somewhere in the system directories. If the version of those is not the one required by the PyQt5 the program will fail with<br>
 	`"This application failed to start because no Qt platform plugin could be initialized. Reinstalling the application may fix this problem."`, <br>
-	a message that typically is not even printed out to the terminal.<br><br><br>
-	**Solution**:
+	a message that typically is not even printed out to the terminal.
+
+**Solution**:
 		Provide the correct path to the Qt shared libraries: e.g.<br>
 				
-	`export LD_LIBRARY_PATH=/path/to/venv/lib/python3.6/site-packages/PyQt5/Qt/lib:$LD_LIBRARY_PATH` 
+	export LD_LIBRARY_PATH=/path/to/venv/lib/python3.6/site-packages/PyQt5/Qt/lib:$LD_LIBRARY_PATH
 or in case of `pip install acomod --user`
 				
-			export LD_LIBRARY_PATH=$HOME/.local/lib/python3.6/site-packages/PyQt5/Qt/lib/python3.6/site-packages/PyQt5/Qt/lib:$LD_LIBRARY_PATH
+	export LD_LIBRARY_PATH=$HOME/.local/lib/python3.6/site-packages/PyQt5/Qt/lib/python3.6/site-packages/PyQt5/Qt/lib:$LD_LIBRARY_PATH
 	
 ## Authors
 Bartosz Lew (bartosz.lew@protonmail.com)
