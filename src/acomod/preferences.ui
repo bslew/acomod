@@ -28,17 +28,10 @@
         <layout class="QGridLayout" name="gridLayout_3">
          <item row="0" column="0">
           <layout class="QGridLayout" name="gridLayout_2">
-           <item row="0" column="0">
-            <widget class="QLabel" name="label_sampling">
+           <item row="3" column="0">
+            <widget class="QLabel" name="label_plotPointsCount">
              <property name="text">
-              <string>Sampling Rate [Hz]:</string>
-             </property>
-            </widget>
-           </item>
-           <item row="2" column="0">
-            <widget class="QLabel" name="label_soundSpeed">
-             <property name="text">
-              <string>Sound Speed [m/s]</string>
+              <string>Plot Points:</string>
              </property>
             </widget>
            </item>
@@ -49,19 +42,10 @@
              </property>
             </widget>
            </item>
-           <item row="2" column="1">
-            <widget class="QDoubleSpinBox" name="doubleSpinBox_soundSpeed">
-             <property name="decimals">
-              <number>2</number>
-             </property>
-             <property name="minimum">
-              <double>0.100000000000000</double>
-             </property>
-             <property name="maximum">
-              <double>1000.000000000000000</double>
-             </property>
-             <property name="value">
-              <double>343.000000000000000</double>
+           <item row="0" column="0">
+            <widget class="QLabel" name="label_sampling">
+             <property name="text">
+              <string>Sampling Rate [Hz]:</string>
              </property>
             </widget>
            </item>
@@ -84,6 +68,13 @@
              </property>
             </widget>
            </item>
+           <item row="2" column="0">
+            <widget class="QLabel" name="label_soundSpeed">
+             <property name="text">
+              <string>Sound Speed [m/s]</string>
+             </property>
+            </widget>
+           </item>
            <item row="0" column="1">
             <widget class="QDoubleSpinBox" name="doubleSpinBox_sampling">
              <property name="decimals">
@@ -100,17 +91,33 @@
              </property>
             </widget>
            </item>
-           <item row="3" column="0">
-            <widget class="QLabel" name="label_plotPointsCount">
+           <item row="2" column="1">
+            <widget class="QDoubleSpinBox" name="doubleSpinBox_soundSpeed">
+             <property name="decimals">
+              <number>2</number>
+             </property>
+             <property name="minimum">
+              <double>0.100000000000000</double>
+             </property>
+             <property name="maximum">
+              <double>1000.000000000000000</double>
+             </property>
+             <property name="value">
+              <double>343.000000000000000</double>
+             </property>
+            </widget>
+           </item>
+           <item row="4" column="0">
+            <widget class="QLabel" name="label_plotPointsCount_2">
              <property name="text">
-              <string>Plot Points:</string>
+              <string>Min. points around maximum:</string>
              </property>
             </widget>
            </item>
            <item row="3" column="1">
             <widget class="QSpinBox" name="spinBox_plotPointsCount">
              <property name="toolTip">
-              <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Defines maximal number of points thatwill be plotted. The program will still calculate and save spectra at full resolution.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+              <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Defines maximal number of points that will be plotted. The program will still calculate and save spectra at full resolution.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
              </property>
              <property name="minimum">
               <number>10</number>
@@ -120,6 +127,22 @@
              </property>
              <property name="value">
               <number>500</number>
+             </property>
+            </widget>
+           </item>
+           <item row="4" column="1">
+            <widget class="QSpinBox" name="spinBox_maximumMinPoints">
+             <property name="toolTip">
+              <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Defines minimal number of points around a peak in order to identify local maximum.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+             </property>
+             <property name="minimum">
+              <number>1</number>
+             </property>
+             <property name="maximum">
+              <number>100</number>
+             </property>
+             <property name="value">
+              <number>2</number>
              </property>
             </widget>
            </item>
@@ -218,7 +241,6 @@
   <tabstop>doubleSpinBox_sampling</tabstop>
   <tabstop>doubleSpinBox_plotRefreshRate</tabstop>
   <tabstop>doubleSpinBox_soundSpeed</tabstop>
-  <tabstop>spinBox_plotPointsCount</tabstop>
   <tabstop>comboBox</tabstop>
  </tabstops>
  <resources/>

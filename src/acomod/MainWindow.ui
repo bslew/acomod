@@ -17,7 +17,7 @@
    </size>
   </property>
   <property name="windowTitle">
-   <string>Accoustic Modes Finder</string>
+   <string>Accoustic Modes Viewer</string>
   </property>
   <property name="statusTip">
    <string/>

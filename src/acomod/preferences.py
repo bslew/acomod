@@ -24,6 +24,7 @@ class PreferencesWindow(QtWidgets.QDialog):
         self.ui.doubleSpinBox_plotRefreshRate.setValue(settings.value('plotRefreshRate',5,type=float))
         self.ui.doubleSpinBox_soundSpeed.setValue(settings.value('soundSpeed',343,type=float))
         self.ui.spinBox_plotPointsCount.setValue(settings.value('plotPointsCount',500,type=int))
+        self.ui.spinBox_maximumMinPoints.setValue(settings.value('maximumMinPoints',10,type=int))
         self.ui.buttonBox.accepted.connect(self.on_accept)
         self.ui.buttonBox.rejected.connect(self.on_reject)
 
@@ -35,6 +36,7 @@ class PreferencesWindow(QtWidgets.QDialog):
         settings.setValue('plotRefreshRate',self.ui.doubleSpinBox_plotRefreshRate.value())
         settings.setValue('soundSpeed',self.ui.doubleSpinBox_soundSpeed.value())
         settings.setValue('plotPointsCount',self.ui.spinBox_plotPointsCount.value())
+        settings.setValue('maximumMinPoints',self.ui.spinBox_maximumMinPoints.value())
 
 #         self.settings.writeSettings()
 #         self.settings.sync()

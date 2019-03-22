@@ -55,7 +55,6 @@ class MatplotlibWidget(FigureCanvas):
     def configurePlotAxes(self):
         settings=global_settings.mySettings(self)
         self.plotPointsCount=settings.value("plotPointsCount",type=int)
-        print('making up labels')
         self.axes.set_xlabel('Frequency [Hz]')
         self.axes.set_ylabel('Power [$Hz^{-1}$]')
         if settings.value("Logarithmic_scale_X",type=bool):
@@ -80,8 +79,8 @@ class MatplotlibWidget(FigureCanvas):
         self.dataCount=0
         self.selectedMaxima=None
 
-    def find_maxima(self, fn,Npeaks):
-        m,=argrelextrema(fn[:,1], np.greater,order=10)
+    def find_maxima(self, fn,Npeaks,maximumMinPoints=10):
+        m,=argrelextrema(fn[:,1], np.greater,order=maximumMinPoints)
 #         print(m)
 #         print(len(m))
         
@@ -169,7 +168,8 @@ class MatplotlibWidget(FigureCanvas):
         # 
         self.Npeaks=self.settings.value("Npeaks",10,int)
         if type(self.maxFn)!=type(None):
-            maxx,maxy=self.find_maxima(self.maxFn,self.Npeaks)
+            maximumMinPoints=self.settings.value("maximumMinPoints",type=int)
+            maxx,maxy=self.find_maxima(self.maxFn,self.Npeaks,maximumMinPoints)
 
             L=[ self.cs/x for x in maxx]
     #             t=self.axes.text(x,y,'{0:.1f} Hz\n{1:.3f} m'.format(x,l))
@@ -208,6 +208,8 @@ class MatplotlibWidget(FigureCanvas):
         if type(self.maxFn)!=type(None):
             self.plotPointsCount=self.settings.value("plotPointsCount",type=int)
             bs=len(self.rawFn)//self.plotPointsCount
+            if bs<1:
+                bs=1
     #         x,y=self.binFn(np.array([x,y],dtype=float).T)
             x,y=self.rawFn[::bs][:,0],self.rawFn[::bs][:,1]
             rawFnPlot, =self.axes.plot(x,y,'k-')

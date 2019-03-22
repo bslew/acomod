@@ -13,12 +13,12 @@ def read(fname):
     return open(os.path.join(os.path.dirname(__file__), fname)).read()
 
 reqired_packages=[
-    'PyQt5>=5.0',
-    'numpy>=1.16',
-    'matplotlib>=3.0',
-    'sounddevice',
-    'soundfile',
-    'scipy>=1.2',
+#    'PyQt5>=5.0',
+#    'numpy>=1.16',
+#    'matplotlib>=3.0',
+#    'sounddevice',
+#    'soundfile',
+#    'scipy>=1.2',
     ]
 
 setup(name='acomod',
