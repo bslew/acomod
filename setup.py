@@ -12,19 +12,21 @@ except LookupError:
 def read(fname):
     return open(os.path.join(os.path.dirname(__file__), fname)).read()
 
-reqired_packages=[
+required_packages=read('requirements.txt').split()
+# reqired_packages=[
 #    'PyQt5>=5.0',
 #    'numpy>=1.16',
 #    'matplotlib>=3.0',
 #    'sounddevice',
 #    'soundfile',
 #    'scipy>=1.2',
-    ]
+#     ]
 
 setup(name='acomod',
-      version='0.1.8',
+      version='0.1.9',
       description='Acoustic Oscillations Viewer',
       long_description=read('README.md'),
+      long_description_content_type='text/markdown',
       author='Bartosz Lew',
       author_email='bartosz.lew@protonmail.com',
       url='https://github.com/bslew/acomod',

@@ -12,15 +12,18 @@ The package provides a module and a program to trace Fourier acoustic modes and 
 
 ## Features
 * Analysis of sound from microphone or from a file (WAV format)
-* To analyze transient signals it keeps track of maximal peaks in processed spectra 
+* In order to analyze transient signals, the program keeps track of maximal peaks detected in the instantaneous  spectra 
 * Saves recorded and processed data to files for further analysis
-* Outputs list of peak frequencies (f) and corresponding wavelengths (l=cs/f)
+* Outputs list of peak frequencies (f) and associated wavelengths (l=cs/f)
 
 ### Features that will be implemented 
 * Save animations of PSD response for video files (not implemented yet)
 
 ## Installation
-	`pip3 install acomod`
+
+```sh
+pip3 install acomod`
+```
 
 ## Screenshots
 
@@ -35,10 +38,15 @@ When you pip3 install acomod in virtual environment or locally via --user option
 **Solution**:
 		Provide the correct path to the Qt shared libraries: e.g.<br>
 				
-	export LD_LIBRARY_PATH=/path/to/venv/lib/python3.6/site-packages/PyQt5/Qt/lib:$LD_LIBRARY_PATH
+```sh
+export LD_LIBRARY_PATH=/path/to/venv/lib/python3.6/site-packages/PyQt5/Qt/lib:$LD_LIBRARY_PATH
+```
+
 or in case of `pip install acomod --user`
 				
-	export LD_LIBRARY_PATH=$HOME/.local/lib/python3.6/site-packages/PyQt5/Qt/lib/python3.6/site-packages/PyQt5/Qt/lib:$LD_LIBRARY_PATH
+```sh
+export LD_LIBRARY_PATH=$HOME/.local/lib/python3.6/site-packages/PyQt5/Qt/lib/python3.6/site-packages/PyQt5/Qt/lib:$LD_LIBRARY_PATH
+```
 	
 ## Authors
 Bartosz Lew (bartosz.lew@protonmail.com)
