@@ -38,6 +38,9 @@ $ echo 'LD_LIBRARY_PATH='`find "$VIRTUAL_ENV" -name "*libQt5Core.so.5*" -exec di
 
 ![Screenshot](screenshot.png)
 
+![Screenshot](https://github.com/bslew/acomod/blob/master/screenshot.png)
+
+
 ## Troubleshooting
 ##### 	**acoustic_mode_viewer gives core dump on start**
 
