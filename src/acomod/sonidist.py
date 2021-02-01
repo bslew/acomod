@@ -6,6 +6,7 @@ Created on Feb 10, 2019
 import os,sys
 sys.path.append(os.sep.join(os.path.abspath(__file__).split(os.sep)[:-2]))  
 
+# from PyQt5 import sip
 from PyQt5 import QtWidgets 
 from acomod import MainWindow
 
@@ -25,7 +26,7 @@ def main():
         sys.exit(app.exec_())
     except:
         print("exiting")
-
+        raise
 
 if __name__ == '__main__':
     main()

@@ -2,3 +2,7 @@
 /dist/
 /.pydevproject
 /.project
+/venv/
+/requirements.txt~
+/requirements.txt~~
+/README.html
