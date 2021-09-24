@@ -18,7 +18,7 @@ The package provides a module and a program to trace Fourier acoustic modes and 
 
 ## Installation
 
-### Virtualenv installation
+### Virtualenv installation with pip
 
 ```sh
 $ python3 -m venv venv
@@ -26,7 +26,21 @@ $ source venv/bin/activate
 $ pip install acomod
 ```
 
-You need to specify the LD_LIBRARY_PATH environment variable to point to the location where appropriate Qt libraries can be found. Let's store these settings in your virtual environment activaton script.
+### From sources (Ubuntu 20.04 LTS)
+
+```sh
+$ sudo apt install libportaudio2/focal
+$ python3 -m venv venv
+$ source venv/bin/activate
+$ git clone https://github.com/bslew/acomod.git
+$ pip install -r requirements.txt
+$ python setup.py build
+$ python setup.py install
+```
+
+
+
+You may need to specify the LD_LIBRARY_PATH environment variable to point to the location where appropriate Qt libraries can be found. Let's store these settings in your virtual environment activaton script.
 
 ```sh
 $ echo 'LD_LIBRARY_PATH='`find "$VIRTUAL_ENV" -name "*libQt5Core.so.5*" -exec dirname "{}" \;`:$LD_LIBRARY_PATH >> venv/bin/activate
