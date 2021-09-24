@@ -21,21 +21,21 @@ The package provides a module and a program to trace Fourier acoustic modes and 
 ### Virtualenv installation with pip
 
 ```sh
-$ python3 -m venv venv
-$ source venv/bin/activate
-$ pip install acomod
+python3 -m venv venv
+source venv/bin/activate
+pip install acomod
 ```
 
 ### From sources (Ubuntu 20.04 LTS)
 
 ```sh
-$ sudo apt install libportaudio2/focal
-$ python3 -m venv venv
-$ source venv/bin/activate
-$ git clone https://github.com/bslew/acomod.git
-$ pip install -r requirements.txt
-$ python setup.py build
-$ python setup.py install
+sudo apt install libportaudio2/focal
+python3 -m venv venv
+source venv/bin/activate
+git clone https://github.com/bslew/acomod.git
+pip install -r requirements.txt
+python setup.py build
+python setup.py install
 ```
 
 
