@@ -117,8 +117,8 @@ class newSoundSample(QtCore.QThread):
         settings=global_settings.mySettings(self)
 
 #         self.update_time=1.0/settings.value('plotRefreshRate',type=float)
-        self.sampling_freq=settings.value('sampling',type=float)
-        self.soundSpeed=settings.value('soundSpeed',type=float)
+        self.sampling_freq=settings.value('sampling',sampling_freq,type=float)
+        self.soundSpeed=settings.value('soundSpeed',soundSpeed,type=float)
         self.plotPointsCount=settings.value('plotPointsCount',500,type=int)
         self.recordingLength=recordingLength
         

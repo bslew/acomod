@@ -38,7 +38,9 @@ class MainWindow(QtWidgets.QMainWindow):
 #         self.ui.pushButton.clicked.connect(self.on_pushButton_clicked)
 
         self.settings=global_settings.mySettings(self)
-
+        prefs=preferences.PreferencesWindow()
+        prefs.on_accept()
+        # prefs.settings.sync()
 
 
         '''

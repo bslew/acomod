@@ -7,7 +7,7 @@ Created on Feb 12, 2019
 import os,sys
 from PyQt5 import QtCore
 PROGRAM_NAME="Acoustic Oscillations Viewer"
-COMPANY_NAME="Torun Centre for Astronomy"
+COMPANY_NAME="bslew"
 PROGRAM_VERSION='0.1 alpha'
 
 class mySettings(QtCore.QSettings):

@@ -33,9 +33,15 @@ sudo apt install libportaudio2/focal
 python3 -m venv venv
 source venv/bin/activate
 git clone https://github.com/bslew/acomod.git
+cd acomod
 pip install -r requirements.txt
 python setup.py build
 python setup.py install
+```
+
+### Run
+```sh
+acoustic_mode_viewer
 ```
 
 

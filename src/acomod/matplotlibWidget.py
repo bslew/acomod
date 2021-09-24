@@ -168,7 +168,7 @@ class MatplotlibWidget(FigureCanvas):
         # 
         self.Npeaks=self.settings.value("Npeaks",10,int)
         if type(self.maxFn)!=type(None):
-            maximumMinPoints=self.settings.value("maximumMinPoints",type=int)
+            maximumMinPoints=self.settings.value("maximumMinPoints",10,type=int)
             maxx,maxy=self.find_maxima(self.maxFn,self.Npeaks,maximumMinPoints)
 
             L=[ self.cs/x for x in maxx]
@@ -206,7 +206,7 @@ class MatplotlibWidget(FigureCanvas):
         # plot
         #
         if type(self.maxFn)!=type(None):
-            self.plotPointsCount=self.settings.value("plotPointsCount",type=int)
+            self.plotPointsCount=self.settings.value("plotPointsCount",500,type=int)
             bs=len(self.rawFn)//self.plotPointsCount
             if bs<1:
                 bs=1
