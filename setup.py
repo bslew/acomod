@@ -15,7 +15,7 @@ def read(fname):
 required_packages=read('requirements.txt').split()
 
 setup(name='acomod',
-      version='0.1.11',
+      version='0.1.12',
       description='Acoustic Oscillations Viewer',
       long_description=read('README.md'),
       long_description_content_type='text/markdown',
