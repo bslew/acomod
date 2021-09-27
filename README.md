@@ -90,7 +90,10 @@ Use Ctrl-l and Ctrl-k to toggle between logarithmic and linear axes.
 
 ### Recording new data
 
-You can record new sounds by pressing Crtl-r. The recording can be latter saved as wav file.
+New sounds can be recorded by pressing Crtl-r. The recording can be latter saved as wav file.
+As in case of "playing" mode, the spectra are calculated using recording lengths as specified
+in the "Record Length" box and the plots are updated on every newly calculated spectra.
+
 
 ## Troubleshooting
 ##### 	**acoustic_mode_viewer gives core dump on start**
